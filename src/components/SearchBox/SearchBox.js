@@ -1,11 +1,10 @@
 import React, { Component, useState } from "react";
 import "./SearchBox.css";
+import { fetchMovies } from "../../manager/REST.js";
+import { useDispatch } from "react-redux";
+import { addMovieAction } from "../../manager/cart/actions";
 
 function SearchBox() {
-  // state = {
-  //     searchLine: ''
-  // }
-
   const [searchLine, setSearchLine] = useState("");
 
   const searchLineChangeHandler = (e) => {
@@ -15,7 +14,11 @@ function SearchBox() {
     e.preventDefault();
   };
 
-  //   const { searchLine } = this.state;
+  const dispatch = useDispatch();
+
+  const searchMovie = () => {
+    dispatch(addMovieAction(searchLine));
+  };
 
   return (
     <div className="search-box">
@@ -34,6 +37,7 @@ function SearchBox() {
           type="submit"
           className="search-box__form-submit"
           disabled={!searchLine}
+          onClick={searchMovie}
         >
           Искать
         </button>

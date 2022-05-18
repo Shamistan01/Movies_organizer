@@ -10,6 +10,7 @@ function Favorites() {
   return (
     <div className="favorites">
       <input
+        value={title}
         onChange={(e) => setTitle(e.target.value)}
         className="favorites__name"
       />

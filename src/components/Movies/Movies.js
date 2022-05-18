@@ -1,49 +1,26 @@
-import React, { Component, useState } from "react";
+import React, { Component, useEffect, useState } from "react";
 import MovieItem from "../MovieItem/MovieItem";
+import { useSelector } from "react-redux";
 import "./Movies.css";
+import { fetchMovies } from "../../manager/REST.js";
 
 function Movies() {
-  //   state = {
-  //     movies: [
-  //       {
-  //         imdbID: "tt3896198",
-  //         title: "Guardians of the Galaxy Vol. 2",
-  //         year: 2017,
-  //         poster:
-  //           "https://m.media-amazon.com/images/M/MV5BNjM0NTc0NzItM2FlYS00YzEwLWE0YmUtNTA2ZWIzODc2OTgxXkEyXkFqcGdeQXVyNTgwNzIyNzg@._V1_SX300.jpg",
-  //       },
-  //       {
-  //         imdbID: "tt0068646",
-  //         title: "The Godfather",
-  //         year: 1972,
-  //         poster:
-  //           "https://m.media-amazon.com/images/M/MV5BM2MyNjYxNmUtYTAwNi00MTYxLWJmNWYtYzZlODY3ZTk3OTFlXkEyXkFqcGdeQXVyNzkwMjQ5NzM@._V1_SX300.jpg",
-  //       },
-  //     ],
-  //   };
+  const [movies, setMovies] = useState([]);
 
-  const [movies, setMovies] = useState([
-    {
-      imdbID: "tt3896198",
-      title: "Guardians of the Galaxy Vol. 2",
-      year: 2017,
-      poster:
-        "https://m.media-amazon.com/images/M/MV5BNjM0NTc0NzItM2FlYS00YzEwLWE0YmUtNTA2ZWIzODc2OTgxXkEyXkFqcGdeQXVyNTgwNzIyNzg@._V1_SX300.jpg",
-    },
-    {
-      imdbID: "tt0068646",
-      title: "The Godfather",
-      year: 1972,
-      poster:
-        "https://m.media-amazon.com/images/M/MV5BM2MyNjYxNmUtYTAwNi00MTYxLWJmNWYtYzZlODY3ZTk3OTFlXkEyXkFqcGdeQXVyNzkwMjQ5NzM@._V1_SX300.jpg",
-    },
-  ]);
+  const select = useSelector((state) => state);
+
+  useEffect(() => {
+    console.log(select.cartReducer.movieGoods);
+    setMovies(select.cartReducer.movieGoods);
+  });
+
+  // const moviesList = useSelector(fetchMovies);
 
   return (
     <ul className="movies">
-      {movies.map((movie) => (
-        <li className="movies__item" key={movie.imdbID}>
-          <MovieItem {...movie} />
+      {movies.map((moviesList) => (
+        <li className="movies__item" key={moviesList.imdbID}>
+          <MovieItem {...moviesList} />
         </li>
       ))}
     </ul>
