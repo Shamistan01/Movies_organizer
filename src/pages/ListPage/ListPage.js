@@ -1,20 +1,15 @@
-import React, { Component, useEffect, useState, useParams } from "react";
+import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 import "./ListPage.css";
 
 function ListPage() {
-  // state = {
-  //     movies: [
-  //         { title: 'The Godfather', year: 1972, imdbID: 'tt0068646' }
-  //     ]
-  // }
-
   const [movies, setMovies] = useState([
     { title: "The Godfather", year: 1972, imdbID: "tt0068646" },
   ]);
-  const { id } = useParams();
+  const params = useParams();
 
   useEffect(() => {
-    console.log(id);
+    console.log(params?.id);
     // TODO: запрос к сервер на получение списка
     // TODO: запросы к серверу по всем imdbID
   });

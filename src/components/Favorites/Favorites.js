@@ -1,31 +1,65 @@
-import React, { Component, useState } from "react";
+import React, { useState } from "react";
 import "./Favorites.css";
+import { Link } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { getFilmsInList } from "../../manager/StarList/selector";
+import { deleteMovieFromList } from "../../manager/StarList/action";
 
 function Favorites() {
-  const [title, setTitle] = useState("Новый список");
-  const [movies, setMovies] = useState([
-    { imdbID: "tt0068646", title: "The Godfather", year: 1972 },
-  ]);
+  const [title, setTitle] = useState("");
+  const [type, setType] = useState(true);
+  const [clicked, setClicked] = useState(false);
+
+  const movies = useSelector(getFilmsInList);
+
+  const changeValue = (e) => {
+    setTitle(e.target.value);
+    e.target.value !== "" && movies[0] ? setType(false) : setType(true);
+  };
+
+  const dispatch = useDispatch();
+
+  const deleteMovie = (e) => {
+    dispatch(deleteMovieFromList(e.target.id));
+  };
+
+  const saveMovies = () => {
+    setClicked(true);
+  };
 
   return (
     <div className="favorites">
       <input
-        value={title}
-        onChange={(e) => setTitle(e.target.value)}
+        placeholder="Новый список"
+        onChange={changeValue}
         className="favorites__name"
+        value={title}
       />
       <ul className="favorites__list">
-        {movies.map((item) => {
-          return (
-            <li key={item.id}>
-              {item.title} ({item.year})
-            </li>
-          );
-        })}
+        {movies &&
+          movies.map((item) => {
+            return (
+              <li key={item.imdbID} className="favorite__list">
+                {item.Title} ({item.Year})
+                <button onClick={deleteMovie} id={item.imdbID}>
+                  &#10006;
+                </button>
+              </li>
+            );
+          })}
       </ul>
-      <button type="button" className="favorites__save">
-        Сохранить список
-      </button>
+      {clicked ? (
+        <Link to="/list/:id">Перейти к списку</Link>
+      ) : (
+        <button
+          onClick={saveMovies}
+          type="button"
+          className="favorites__save"
+          disabled={type}
+        >
+          Сохранить список
+        </button>
+      )}
     </div>
   );
 }

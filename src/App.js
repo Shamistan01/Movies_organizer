@@ -9,8 +9,12 @@ import "./common.css";
 function App() {
   return (
     <div className="app">
-      <Route path="/" exact component={MainPage} />
-      <Route path="/list/:id" exact component={ListPage} />
+      <Route exact path="/">
+        <MainPage />
+      </Route>
+      <Route path="/list/:id">
+        <ListPage />
+      </Route>
     </div>
   );
 }

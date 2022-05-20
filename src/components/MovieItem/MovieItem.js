@@ -1,8 +1,16 @@
 import React, { Component } from "react";
+import { useDispatch } from "react-redux";
+import { saveInListAction } from "../../manager/StarList/action";
 import "./MovieItem.css";
 
 function MovieItem(props) {
   const { Title, Year, Poster } = props;
+
+  const dispatch = useDispatch();
+
+  const addInList = () => {
+    dispatch(saveInListAction(props));
+  };
   return (
     <article className="movie-item">
       <img className="movie-item__poster" src={Poster} alt={Title} />
@@ -10,7 +18,11 @@ function MovieItem(props) {
         <h3 className="movie-item__title">
           {Title}&nbsp;({Year})
         </h3>
-        <button type="button" className="movie-item__add-button">
+        <button
+          onClick={addInList}
+          type="button"
+          className="movie-item__add-button"
+        >
           Добавить в список
         </button>
       </div>

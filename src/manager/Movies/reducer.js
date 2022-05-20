@@ -1,5 +1,4 @@
-import { ADD_MOVIE, MOVIES_DATA } from "../constants";
-// import {moviesData} from "./actions"
+import { MOVIES_DATA } from "../constants";
 
 const initialValues = {
   movieGoods: [],
@@ -10,13 +9,6 @@ const cartReducer = (state = initialValues, action) => {
     case MOVIES_DATA:
       console.log(action.payload);
       return { ...state, movieGoods: action.payload };
-    // case DELETE_MOVIE:
-    //   return {
-    //     ...state,
-    //     movieGoods: state.movieGoods.filter(
-    //       (good) => good.id !== action.payload
-    //     ),
-    //   };
     default:
       return state;
   }

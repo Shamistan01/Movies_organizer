@@ -2,27 +2,21 @@ import React, { Component, useEffect, useState } from "react";
 import MovieItem from "../MovieItem/MovieItem";
 import { useSelector } from "react-redux";
 import "./Movies.css";
-import { fetchMovies } from "../../manager/REST.js";
+import { getCartMoviesSelector } from "../../manager/Movies/selectors";
 
 function Movies() {
-  const [movies, setMovies] = useState([]);
-
-  const select = useSelector((state) => state);
-
-  useEffect(() => {
-    console.log(select.cartReducer.movieGoods);
-    setMovies(select.cartReducer.movieGoods);
-  });
-
-  // const moviesList = useSelector(fetchMovies);
+  const movies = useSelector(getCartMoviesSelector);
 
   return (
     <ul className="movies">
-      {movies.map((moviesList) => (
-        <li className="movies__item" key={moviesList.imdbID}>
-          <MovieItem {...moviesList} />
-        </li>
-      ))}
+      {movies &&
+        movies.map((moviesList) => {
+          return (
+            <li className="movies__item" key={moviesList.imdbID}>
+              <MovieItem {...moviesList} />
+            </li>
+          );
+        })}
     </ul>
   );
 }
