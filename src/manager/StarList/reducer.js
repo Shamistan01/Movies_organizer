@@ -1,4 +1,4 @@
-import { SAVE_IN_LIST, DELETE_MOVIE } from "../constants";
+import { SAVE_IN_LIST, DELETE_MOVIE, SAVE_MOVIE } from "../constants";
 
 const initialValues = {
   filmFavorits: [],
@@ -22,6 +22,11 @@ const movieItemReducer = (state = initialValues, action) => {
         filmFavorits: [
           ...state.filmFavorits.filter((el) => el.imdbID !== action.payload),
         ],
+      };
+    case SAVE_MOVIE:
+      if (itemExist) return state;
+      return {
+        ...state,
       };
     default:
       return state;

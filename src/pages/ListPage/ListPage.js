@@ -1,15 +1,18 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import "./ListPage.css";
+import { useSelector } from "react-redux";
+import { saveMovieList } from "../../manager/StarList/selector";
 
 function ListPage() {
-  const [movies, setMovies] = useState([
-    { title: "The Godfather", year: 1972, imdbID: "tt0068646" },
-  ]);
+  const [movies, setMovies] = useState([]);
   const params = useParams();
+
+  const saveFilms = useSelector(saveMovieList);
 
   useEffect(() => {
     console.log(params?.id);
+    setMovies(saveFilms);
     // TODO: запрос к сервер на получение списка
     // TODO: запросы к серверу по всем imdbID
   });
@@ -21,8 +24,11 @@ function ListPage() {
         {movies.map((item) => {
           return (
             <li key={item.imdbID}>
-              <a href="https://www.imdb.com/title/tt0068646/" target="_blank">
-                {item.title} ({item.year})
+              <a
+                href={`https://www.imdb.com/title/${item.imdbID}/`}
+                target="_blank"
+              >
+                {item.Title} ({item.Year})
               </a>
             </li>
           );
