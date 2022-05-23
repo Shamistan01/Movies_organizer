@@ -1,6 +1,7 @@
-import { takeEvery, put, call } from "redux-saga/effects";
+import { takeEvery,  call } from "redux-saga/effects";
 import { SAVE_MOVIE } from "../constants";
 import { saveFetchMovieList } from "../REST";
+
 
 function* workerMovies(action) {
   try {

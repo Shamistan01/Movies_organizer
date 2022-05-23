@@ -1,7 +1,6 @@
 import { takeEvery, put, call } from "redux-saga/effects";
-import { ADD_MOVIE, DELETE_MOVIE } from "../constants";
-import { addMovieAction, moviesData } from "./actions";
-import { getCartMoviesSelector } from "./selectors";
+import { ADD_MOVIE } from "../constants";
+import { moviesData } from "./actions";
 import { fetchMovies } from "../REST";
 
 function* workerMovie(action) {

@@ -13,8 +13,6 @@ function ListPage() {
   useEffect(() => {
     console.log(params?.id);
     setMovies(saveFilms);
-    // TODO: запрос к сервер на получение списка
-    // TODO: запросы к серверу по всем imdbID
   });
 
   return (

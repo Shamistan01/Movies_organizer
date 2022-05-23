@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import { useDispatch } from "react-redux";
 import { saveInListAction } from "../../manager/StarList/action";
 import "./MovieItem.css";
